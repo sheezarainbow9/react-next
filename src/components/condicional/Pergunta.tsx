@@ -1,22 +1,41 @@
-import { useState } from "react";
+import If from "./If";
+import {
+  IconChevronDown,
+  IconChevronUp,
+} from "@tabler/icons-react";
 
-export default function Pergunta() {
-  const [aberta, setAberta] = useState<boolean>(false);
+interface PerguntaProps {
+  indice: number
+  texto: string;
+  resposta: string;
+  aberta: boolean
+  alternarVisibilidade: (indice: number) => void
+}
+
+export default function Pergunta(props: PerguntaProps) {
 
   return (
     <div
       className={`
-    border border-white rounded-md
+    border border-zinc-600 rounded-md overflow-hidden
+    
   `}
     >
       <div
-        className="bg-zinc-700 p-5 cursor-pointer select-none"
-        onClick={() => setAberta(!aberta)}
+        className="bg-zinc-800 p-5 cursor-pointer select-none flex justify-between"
+        onClick={() => props.alternarVisibilidade(props.indice)}
       >
-        Pergunta
+        <span>{props.texto}</span>
+        {props.aberta ? <IconChevronDown /> : <IconChevronUp />}
+        {/* Ou: <IfElse teste={aberta}>
+          <IconChevronDown />
+          <IconChevronUp />
+        </IfElse> */}
       </div>
-      {aberta ? "Sim" : "Não"}
-      <div className="p-5">Resposta</div>
+      <If teste={props.aberta}>
+        <div className="p-5">{props.resposta}</div>
+        {/* Ou: {aberta ? "Sim" : "Não"}  */}
+      </If>
     </div>
   );
 }
