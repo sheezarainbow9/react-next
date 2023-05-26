@@ -1,4 +1,5 @@
 import useStarWars from "@/components/data/hooks/useStarWars";
+import Background from "@/components/starwars/Background";
 import Personagens from "@/components/starwars/Personagens";
 
 export default function PaginaStarWars() {
@@ -7,9 +8,13 @@ export default function PaginaStarWars() {
   return (
     <div
       className={`
-      flex justify-center items-center h-screen
+      flex fle-col gap-5 justify-center items-center h-screen
     `}
     >
+      <Background />
+      <button onClick={obterPersonagens} className="bg-blue-500 p-2">
+        Obter
+      </button>
       {processando ? (
         <div>Processando...</div>
       ) : personagens.length > 0 ? (
@@ -17,9 +22,7 @@ export default function PaginaStarWars() {
       ) : (
         <div>Nenhum personagem encontrado</div>
       )}
-      <button onClick={obterPersonagens} className="bg-blue-500 p-2">
-        Obter
-      </button>
+      
     </div>
   );
 }
