@@ -11,4 +11,4 @@
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
 
-# Repositório com aulas sobre React e Netxt.js, apenas para fins didáticos.
+# Repositório com aulas sobre React e Next.js, apenas para fins didáticos.
