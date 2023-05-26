@@ -1,20 +1,7 @@
-import { useState } from "react";
-import useProcessando from "../data/hooks/useProcessando";
+import useStarWars from "../data/hooks/useStarWars";
 
 export default function Personagens() {
-  const { processando, iniciarProcessamento, finalizarProcessamento } = useProcessando();
-  const [personagens, setPersonagens] = useState<any>([])
-
-  async function obterPersonagens() {
-    try {
-      iniciarProcessamento();
-      const resp = await fetch('http://swapi.dev/api/people/')
-      const dados = await resp.json()
-      setPersonagens(dados.results)
-    } finally {
-      finalizarProcessamento();
-    }
-  }
+  const { processando, personagens, obterPersonagens } = useStarWars();
 
   return (
     <div>
