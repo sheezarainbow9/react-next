@@ -1,25 +1,22 @@
-import useStarWars from "../data/hooks/useStarWars";
+interface PersonagensProps {
+  personagens: any[]
+}
 
-export default function Personagens() {
-  const { processando, personagens, obterPersonagens } = useStarWars();
+export default function Personagens(props: PersonagensProps) {
+
+  function renderizarPersonagens() {
+    return (
+      <ul>
+          {props.personagens.map((p: any) => (
+            <li key={p.name}>{p.name}</li>
+          ))}
+      </ul>
+    )
+  }
 
   return (
     <div>
-      {processando ? (
-        <div>Processando...</div>
-      ) : personagens.length > 0 ? (
-        <ul>
-          {personagens.map((p: any) => (
-            <li key={p.name}>{p.name}</li>
-          ))}
-        </ul>
-      ) : (
-        <h1>Nenhum personagem encontrado</h1>
-      )}
-
-      <button onClick={obterPersonagens} className="bg-blue-500 p-2">
-        Obter
-      </button>
+      {renderizarPersonagens()}
     </div>
   );
 }
