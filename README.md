@@ -13,7 +13,7 @@
 
 # Repositório com aulas sobre React e Next.js, apenas para fins didáticos.
 
-## Aspectos Abordados
+## Aspectos Abordados:
 
 - ✅ [Next] pasta pages gera as rotas
 - ✅ [React] primeiro componente
