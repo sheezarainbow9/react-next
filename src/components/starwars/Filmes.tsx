@@ -1,40 +1,39 @@
-import { IconCheck } from "@tabler/icons-react";
-
 interface FilmesProps {
   filmes: any[];
-  selecionar: (personagem: any) => void;
+  voltar: () => void;
 }
 
-export default function Filmes(props: PersonagensProps) {
+export default function Filmes(props: FilmesProps) {
   return (
-    <table className="w-3/5" text-xl>
-      <thead>
-        <tr className="bg-zinc-900 opacity-70 rounded-lg overflow-hidden">
-          <th className="p-2 font-black">Nome</th>
-          <th className="p-2 font-black">Altura</th>
-          <th className="p-2 font-black">Peso</th>
-          <th className="p-2 font-black">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.personagens.map((p: any, indice: number) => (
-          <tr
-            key={p.name}
-            className={`
+    <div className="flex flex-col gap-5 items-center w-full">
+      <button className="botao" onClick={props.voltar}>
+        Voltar
+      </button>
+      <table className="w-3/5" text-xl opacity-70 rounded-lg overflow-hidden>
+        <thead>
+          <tr className="bg-zinc-900">
+            <th className="p-2 font-black">Título</th>
+            <th className="p-2 font-black">Episódio</th>
+            <th className="p-2 font-black">Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.filmes.map((filme: any, indice: number) => (
+            <tr
+              key={filme.titulo}
+              className={`
               ${indice % 2 === 0 ? "bg-zinc-700" : "bg-zinc-800"}
           `}
-          >
-            <td className="p-2">{p.name}</td>
-            <td className="p-2">{p.height}</td>
-            <td className="p-2">{p.mass}</td>
-            <td className="p-2">
-              <button className="botao" onClick={() => props.selecionar(p)}>
-                <IconCheck size={20} />
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+            >
+              <td className="p-2">{filme.title}</td>
+              <td className="p-2">{filme.episode_id}</td>
+              <td className="p-2">
+                {new Date(filme.release_date).toLocaleDateString("pt-BR")}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

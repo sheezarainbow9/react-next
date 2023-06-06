@@ -8,19 +8,22 @@ export default function useStarWars() {
   const [personagem, setPersonagem] = useState<any>([]);
   const [filmes, setFilmes] = useState<any>([]);
 
-  const obterFilmes = useCallback(async function (personagem: any) {
-    if (personagem?.films?.length) return;
-    try {
-      const requests = personagem.films.map(async (film: string) => {
-      const resposta = await fetch(film);
-      return resposta.json();
-    });
-    const filmes = await Promise.all(requests);
-    setFilmes(filmes);
-    } finally {
-      finalizarProcessamento()
-    }
-  }, [iniciarProcessamento, finalizarProcessamento]);
+  const obterFilmes = useCallback(
+    async function (personagem: any) {
+      if (!personagem?.films?.length) return;
+      try {
+        const requests = personagem.films.map(async (film: string) => {
+          const resposta = await fetch(film);
+          return resposta.json();
+        });
+        const filmes = await Promise.all(requests);
+        setFilmes(filmes);
+      } finally {
+        finalizarProcessamento();
+      }
+    },
+    [iniciarProcessamento, finalizarProcessamento]
+  );
 
   // Assim, vai ser chamado uma única vez.
   const obterPersonagens = useCallback(
@@ -41,6 +44,11 @@ export default function useStarWars() {
     setPersonagem(personagem);
   }
 
+  function voltar() {
+    setPersonagem(null);
+    setFilmes([]);
+  }
+
   useEffect(() => {
     obterPersonagens();
   }, [obterPersonagens]);
@@ -51,7 +59,9 @@ export default function useStarWars() {
 
   return {
     personagens,
+    filmes,
     processando,
     selecionarPersonagem,
+    voltar,
   };
 }
